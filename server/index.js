@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoutes from "./routes/user.route.js";
+import authRoutes from "./routes/auth.route.js";
 
 // intialise the dotenv
 dotenv.config();
@@ -20,9 +21,15 @@ mongoose
 
 const app = express();
 
+// to send the data in json format
+app.use(express.json());
+
 app.listen(3000, (req, res) => {
   console.log("Server is running on port : 3000");
 });
 
 // API
-app.use("/api/user/", userRoutes);
+app.use("/api/user", userRoutes);
+
+// API For the User registration
+app.use("/api/auth", authRoutes);
